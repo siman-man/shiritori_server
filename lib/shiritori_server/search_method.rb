@@ -1,26 +1,27 @@
 module ShiritoriServer
-  module SearchMethod
-    UNUSE_METHOD = [:exit]
+  class SearchMethod
+    class << self
+      def get_all_methods
+        @check_list = {}
+        @method_list = []
 
-    def get_all_method
-      @check_list = {}
-      @method_list = []
+        scan_method
+        @method_list
+      end
 
-      scan_method
+      def singleton(klass)
+        class << klass;
+          self
+        end
+      end
 
-      @method_list - UNUSE_METHOD
-    end
+      def scan_method(klass = BasicObject)
+        @check_list[klass] = true
+        @method_list |= klass.instance_methods
 
-    def singleton(klass)
-      class << klass; self end
-    end
-
-    def scan_method(klass = BasicObject)
-      @check_list[klass] = true
-      @method_list |= klass.instance_methods
-
-      ObjectSpace.each_object(singleton(klass)) do |subclass|
-        scan_method(subclass) if klass != subclass && @check_list[subclass].nil?
+        ObjectSpace.each_object(singleton(klass)) do |subclass|
+          scan_method(subclass) if klass != subclass && @check_list[subclass].nil?
+        end
       end
     end
   end

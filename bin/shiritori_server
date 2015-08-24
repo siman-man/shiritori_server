@@ -1,2 +1,5 @@
 #!/usr/local/bin/ruby
-puts 'hello'
+
+require 'shiritori_server'
+
+ShiritoriServer::Main.new.start
