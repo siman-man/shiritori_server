@@ -1,14 +1,16 @@
 require 'socket'
 require 'json'
 
-socket = TCPSocket.open('localhost', 20000)
+while msg = gets
+  socket = TCPSocket.open('localhost', 20000)
 
-data = {
-  username: 'siman', 
-  command: "first"
-}
+  data = {
+    username: 'siman', 
+    command: msg.chomp
+  }
 
-socket.puts(data.to_json)
-puts socket.gets
+  socket.puts(data.to_json)
+  puts socket.gets
+  socket.close
+end
 
-socket.close

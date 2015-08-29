@@ -41,7 +41,7 @@ module ShiritoriServer
         message['current_class'] = @current_class
         message['current_chain'] = @current_chain.join
         message['chain_count'] = @chain_count
-        socket.write(message.to_json)
+        socket.puts(message.to_json)
       ensure
         socket.close
       end
@@ -50,6 +50,8 @@ module ShiritoriServer
     def receive_message(socket)
       message = JSON.parse(socket.gets)
       message['command'] = message['command'].sub(/^\./, '')
+
+      p message
 
       message
     end

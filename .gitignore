@@ -34,3 +34,4 @@ config/database.yml
 .project
 .idea
 .secret
+*.out
