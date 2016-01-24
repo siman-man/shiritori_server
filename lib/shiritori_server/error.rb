@@ -7,6 +7,12 @@ module ShiritoriServer
     end
   end
 
+  class ShiritoriChainError < ShiritoriError
+    def message
+      %q(Failed method chain.)
+    end
+  end
+
   class UndefinedObjectError < ShiritoriError
     def message
       'Undefined Object'
