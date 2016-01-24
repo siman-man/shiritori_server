@@ -1,8 +1,9 @@
 require 'socket'
 require 'json'
 
-while msg = gets
-  socket = TCPSocket.open('localhost', 20000)
+begin
+  msg = gets
+  socket = TCPSocket.open('localhost', 46106)
 
   data = {
     username: 'siman', 
@@ -10,7 +11,10 @@ while msg = gets
   }
 
   socket.puts(data.to_json)
-  puts socket.gets
-  socket.close
+  result = socket.gets
+  puts JSON.parse(result).class
+  puts result
+ensure
+  socket&.close
 end
 

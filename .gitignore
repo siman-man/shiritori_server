@@ -35,3 +35,4 @@ config/database.yml
 .idea
 .secret
 *.out
+.rbenv-gemsets

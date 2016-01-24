@@ -1,3 +1,5 @@
+require 'logger'
+
 require 'shiritori_server/version'
 require 'shiritori_server/error'
 require 'shiritori_server/search_method'
